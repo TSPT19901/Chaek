@@ -48,6 +48,7 @@ def sign_up_login():
             print("Input Only [S], [L], [E]\n")
         elif input_choice == "L":
             login()
+            
             continue
         elif input_choice == "S":
             sign_up()
@@ -109,9 +110,9 @@ class authentication:
 
     def compare_private_password(self, password_attempt): #login account   
         if password_attempt == self.__password:
+            print("Login successfully <3\n\n")
+
             tool_option.tool_option(self.username)
-            
-            print("Login successfully <3")
         else:
             print("Invalid password!!!")
       
@@ -124,8 +125,14 @@ def login(): #login account
             user1 = authentication(username , dict_store_account[username]) #object and pass value to attribute of class
             password = getpass("Password: ")
             user1.compare_private_password(password)
+            
         else:
             print("Username does not exist!!!\n\n") 
+
+
+
+
+
 
 
 

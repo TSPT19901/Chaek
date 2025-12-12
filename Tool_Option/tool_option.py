@@ -1,7 +1,12 @@
 from Password_Strengh_Analyzer import Password_Strengh_Analyzer
 from Encryption_Decryption import Encryption_Decryption
+import os
+import time
+import sys
 
 def tool_option(username):
+    loading_display()
+    clear_after(0.1)
     while True:
         
         print("\n==============================")
@@ -28,4 +33,12 @@ def tool_option(username):
         elif choice == "4":
             break
 
-# def update()
+def clear_after(seconds):
+    time.sleep(seconds)
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def loading_display():
+    for i in range(10):
+        sys.stdout.write("\rLoading" + "." * (i % 4))
+        sys.stdout.flush()
+        time.sleep(0.5)
