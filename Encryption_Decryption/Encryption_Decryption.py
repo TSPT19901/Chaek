@@ -83,6 +83,8 @@ def display_and_execute():
 
         elif option == "2":
             file_name= input("Please input your file name: ")
+            if (file_name.startswith('"') and file_name.endswith('"')) or (file_name.startswith("'") and file_name.endswith("'")):
+                file_name = file_name[1:-1]
             #to check if encrypted file is exist or not 
             if not os.path.exists(file_name):
                 print("No history found.")
