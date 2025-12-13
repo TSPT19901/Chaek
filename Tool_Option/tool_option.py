@@ -1,9 +1,10 @@
-from Password_Strengh_Analyzer import Password_Strengh_Analyzer
+from Password_Strength_Analyzer import Password_Strength_Analyzer
 from Encryption_Decryption import Encryption_Decryption
 import os
 import time
 import sys
 
+#display option for users
 def tool_option(username):
     loading_display()
     clear_after(0.1)
@@ -24,7 +25,8 @@ def tool_option(username):
             print("Invalid!!!")
             print("Input Only [1], [2], [3], [4]\n")
         elif choice == "1":
-            Password_Strengh_Analyzer.main_password_check(username)
+            #get into Password strength analyzer for using tool
+            Password_Strength_Analyzer.main_password_check(username)
             continue
         elif choice == "2":
             pass
@@ -33,10 +35,11 @@ def tool_option(username):
         elif choice == "4":
             break
 
+#function clear previous screen
 def clear_after(seconds):
     time.sleep(seconds)
     os.system('cls' if os.name == 'nt' else 'clear')
-
+#function display loading...
 def loading_display():
     for i in range(10):
         sys.stdout.write("\r       Loading" + "." * (i % 4))

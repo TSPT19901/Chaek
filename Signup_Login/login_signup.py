@@ -1,5 +1,5 @@
 from Tool_Option import tool_option
-from Password_Strengh_Analyzer import Password_Strengh_Analyzer
+from Password_Strength_Analyzer import Password_Strength_Analyzer
 from getpass import getpass
 
 dict_store_account = {} #store username password to file : account.txt
@@ -96,7 +96,7 @@ def sign_up(): #Sign up account
         if (has_number and has_special and has_upper and has_lower):
             print("Sign up seccessfully!!!\n\n")
             save_data_to_File(dict_store_account, "DATA/account.txt", username, password)
-            Password_Strengh_Analyzer.history_account(username)
+            Password_Strength_Analyzer.history_account(username)
             part = "History_each_user/" + username + ".txt"
 
             with open(part, "w"):

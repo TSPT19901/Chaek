@@ -1,5 +1,6 @@
-from Signup_Login import login_signup
+from Signup_Login import login_signup #import signup login file
 
+#display welcome 
 print("                                         -------------------WELCOME TO PERSONAL SECURITY TOOLKIT-------------------")
 
 for i in range(5):
@@ -10,6 +11,5 @@ for i in range(5):
     print("")
 print("                                         --------------------------------------------------------------------------")
 print("\n\n\n")
+#Call function
 login_signup.sign_up_login()
-
-##Hi The New Change 
