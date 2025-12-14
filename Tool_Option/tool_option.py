@@ -1,6 +1,7 @@
 #import module to make connection each other 
 from Password_Strength_Analyzer import Password_Strength_Analyzer
 from Encryption_Decryption import Encryption_Decryption
+from File_Integrity import file_integrity
 import os
 import time
 import sys
@@ -29,10 +30,12 @@ def tool_option(username):
             Password_Strength_Analyzer.main_password_check(username)
             continue
         elif choice == "2":
-            pass
+            file_integrity.main()
+            continue
         elif choice == "3":
             #get into Encryption/Decryption for using tool
             Encryption_Decryption.display_and_execute()
+            continue
         elif choice == "4":
             break
 
