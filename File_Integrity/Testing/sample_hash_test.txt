@@ -1,9 +1,0 @@
-Sample Text File for Hash Testing
------------------------------------
-This is a simple file you can use to test hashing.
-You can read this file in Python and compute hashes,
-such as using hashlib.sha256() or the built-in hash().
-
-Modify the content and observe how the
-hash value changes with even tiny edits.
-

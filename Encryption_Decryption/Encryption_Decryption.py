@@ -44,67 +44,85 @@ class EncryptionDecryption(Key):
         return decrypted.decode()
 #function to display and execute all methods here
 def display_and_execute():
-#style loading
-    tool_option.loading_display()
-    tool_option.clear_after(0.1)
-    re_file =0 #variable for track if user start encrypt again or not 
-    #create object using EncryptionDecryption class
-    obj = EncryptionDecryption()
-    #condition here to check is key file is existed or not
-    if not os.path.exists("Encryption_Decryption/public.pem") or not os.path.exists("Encryption_Decryption/private.pem"):
-        obj.new_key()
-        obj.save_public_key()
-        obj.save_private_key()
-    else:
-        obj.load_keys()              
+    try:
+    #style loading
+        tool_option.loading_display()
+        tool_option.clear_after(0.1)
 
-    print("┌───────────────────────────────┐")
-    print("│      Encryption/Decryption    │")
-    print("└───────────────────────────────┘\n")    
+        re_file = 0 #variable for track if user start encrypt again or not 
+        #create object using EncryptionDecryption class
+        obj = EncryptionDecryption()
 
-    while True:
-        print("\nPlease choose an option:\n[1] Encrypt text\n[2] Decrypt text\n[3] Exit")
-        option = input("Option: ")
-        #for option 1, when user encrypt the new text, file will override
-        if option == "1":
-            if re_file==0:
-                text = input("Enter the text to encrypt: ")
-                encrypted = obj.encryption(text)
-                #we use encoding="utf-8" to tell python how to covert data from byte to string for save to file 
-                with open("DATA/HistoryText.txt", "w", encoding="utf-8") as f:
-                    #we use repr function to convert from byte to strign here 
-                    #The file will be use to decrypt for entire text in the file 
-                    f.write(repr(encrypted) + "\n") 
-                re_file+=1
-            elif re_file>0:
-                text = input("Enter the text to encrypt: ")
-                encrypted = obj.encryption(text)
-                with open("DATA/HistoryText.txt", "a", encoding="utf-8") as f:
-                    f.write(repr(encrypted) + "\n")
-            print("\nEncrypted data:\n", encrypted)
+        try:
+        #condition here to check is key file is existed or not
+            if not os.path.exists("Encryption_Decryption/public.pem") or not os.path.exists("Encryption_Decryption/private.pem"):
+                obj.new_key()
+                obj.save_public_key()
+                obj.save_private_key()
+            else:
+                obj.load_keys()
+        except Exception:
+            print("Key loading/generation failed.")
+            return
 
-        elif option == "2":
-            file_name= input("Please input your file name: ")
-            if (file_name.startswith('"') and file_name.endswith('"')) or (file_name.startswith("'") and file_name.endswith("'")):
-                file_name = file_name[1:-1]
-            #to check if encrypted file is exist or not 
-            if not os.path.exists(file_name):
-                print("No history found.")
-                continue
-            #then if file is existed, open that file and start reading 
-            with open(file_name, "r", encoding="utf-8") as f:
-                lines = f.readlines()
-            print("\nDecrypted messages:")
-            for line in lines:
-                #we make new variable and use ast.literal_eval to convert back from strign to byte
-                encrypted_bytes = ast.literal_eval(line.strip())  # use .strip() to eliminate or skip the new line
-                #after convert, we can call our function decryption
-                decrypted_text = obj.decryption(encrypted_bytes)
-                print(decrypted_text)
 
-        elif option == "3":
-            print("Exiting program.")
-            break
-        else:
-            print("Invalid option! Please choose 1, 2, or 3.")
+        while True:
+            print("┌───────────────────────────────┐")
+            print("│      Encryption/Decryption    │")
+            print("└───────────────────────────────┘\n")    
+            print("\nPlease choose an option:\n[1] Encrypt text\n[2] Decrypt text\n[3] Exit")
+            option = input("Option: ")
 
+            #for option 1, when user encrypt the new text, file will override
+            if option == "1":
+                try:
+                    if re_file == 0:
+                        text = input("Enter the text to encrypt: ")
+                        encrypted = obj.encryption(text)
+                        #we use encoding="utf-8" to tell python how to covert data from byte to string for save to file 
+                        with open("DATA/HistoryText.txt", "w", encoding="utf-8") as f:
+                            #we use repr function to convert from byte to strign here 
+                            #The file will be use to decrypt for entire text in the file 
+                            f.write(repr(encrypted) + "\n") 
+                        re_file += 1
+                    elif re_file > 0:
+                        text = input("Enter the text to encrypt: ")
+                        encrypted = obj.encryption(text)
+                        with open("DATA/HistoryText.txt", "a", encoding="utf-8") as f:
+                            f.write(repr(encrypted) + "\n")
+                    print("\nEncrypted data:\n", encrypted)
+                except Exception:
+                    print("Encryption failed.")
+
+            elif option == "2":
+                try:
+                    file_name = input("Please input your file name: ")
+                    if (file_name.startswith('"') and file_name.endswith('"')) or \
+                       (file_name.startswith("'") and file_name.endswith("'")):
+                        file_name = file_name[1:-1]
+                    #to check if encrypted file is exist or not 
+                    if not os.path.exists(file_name):
+                        print("No history found.")
+                        continue
+                    #then if file is existed, open that file and start reading 
+                    with open(file_name, "r", encoding="utf-8") as f:
+                        lines = f.readlines()
+
+                    print("\nDecrypted messages:")
+                    for line in lines:
+                        #we make new variable and use ast.literal_eval to convert back from strign to byte
+                        encrypted_bytes = ast.literal_eval(line.strip())  # use .strip() to eliminate or skip the new line
+                        #after convert, we can call our function decryption
+                        decrypted_text = obj.decryption(encrypted_bytes)
+                        print(decrypted_text)
+                except Exception:
+                    print("Decryption failed or file format is invalid.")
+
+            elif option == "3":
+                print("Exiting program.")
+                break
+            else:
+                print("Invalid option! Please choose 1, 2, or 3.")
+
+    except KeyboardInterrupt:
+        print("\nProgram interrupted.")
