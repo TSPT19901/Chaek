@@ -1,0 +1,11 @@
+Sample Test File
+================
+
+This file is created for testing file operations in Python.
+
+- Item 1: Check file reading
+- Item 2: Check file writing
+- Item 3: Check file hashing
+
+Remember: Python handles text files easily!
+End of file.

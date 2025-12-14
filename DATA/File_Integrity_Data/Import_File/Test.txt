@@ -1,0 +1,7 @@
+Hello! This is a sample text file for testing purposes.
+You can add multiple lines to simulate real data.
+
+Line 1: The quick brown fox jumps over the lazy dog.
+Line 2: Python makes file handling easy and fun.
+Line 3: This file will be used to test hashing or reading operations.
+Line 4: End of test file.
