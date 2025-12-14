@@ -1,6 +1,7 @@
 import rsa
 import os
 import ast
+from colorama import Fore
 from Tool_Option import tool_option
 
 # create a base Key class
@@ -90,7 +91,7 @@ def display_and_execute():
                         encrypted = obj.encryption(text)
                         with open("DATA/HistoryText.txt", "a", encoding="utf-8") as f:
                             f.write(repr(encrypted) + "\n")
-                    print("\nEncrypted data:\n", encrypted)
+                    print(Fore.RED + "\nEncrypted messages:\n", encrypted)
                 except Exception:
                     print("Encryption failed.")
 
@@ -108,7 +109,7 @@ def display_and_execute():
                     with open(file_name, "r", encoding="utf-8") as f:
                         lines = f.readlines()
 
-                    print("\nDecrypted messages:")
+                    print(Fore.GREEN + "\nDecrypted messages:")
                     for line in lines:
                         #we make new variable and use ast.literal_eval to convert back from strign to byte
                         encrypted_bytes = ast.literal_eval(line.strip())  # use .strip() to eliminate or skip the new line
