@@ -65,11 +65,11 @@ def display_and_execute():
             print("Key loading/generation failed.")
             return
 
-        print("┌───────────────────────────────┐")
-        print("│      Encryption/Decryption    │")
-        print("└───────────────────────────────┘\n")    
 
         while True:
+            print("┌───────────────────────────────┐")
+            print("│      Encryption/Decryption    │")
+            print("└───────────────────────────────┘\n")    
             print("\nPlease choose an option:\n[1] Encrypt text\n[2] Decrypt text\n[3] Exit")
             option = input("Option: ")
 
