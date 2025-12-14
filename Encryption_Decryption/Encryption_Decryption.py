@@ -71,7 +71,7 @@ def display_and_execute():
                 text = input("Enter the text to encrypt: ")
                 encrypted = obj.encryption(text)
                 #we use encoding="utf-8" to tell python how to covert data from byte to string for save to file 
-                with open("Encryption_Decryption/HistoryText.txt", "w", encoding="utf-8") as f:
+                with open("DATA/HistoryText.txt", "w", encoding="utf-8") as f:
                     #we use repr function to convert from byte to strign here 
                     #The file will be use to decrypt for entire text in the file 
                     f.write(repr(encrypted) + "\n") 
@@ -79,7 +79,7 @@ def display_and_execute():
             elif re_file>0:
                 text = input("Enter the text to encrypt: ")
                 encrypted = obj.encryption(text)
-                with open("Encryption_Decryption/HistoryText.txt", "a", encoding="utf-8") as f:
+                with open("DATA/HistoryText.txt", "a", encoding="utf-8") as f:
                     f.write(repr(encrypted) + "\n")
             print("\nEncrypted data:\n", encrypted)
 
