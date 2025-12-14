@@ -10,5 +10,9 @@
     "D:\\Chaek\\DATA\\File_Integrity_Data\\Import_File\\Document.txt": {
         "hash": "076e8c50a6e6ea975b400c2a60c3eadd3ba3615b49c90547381b875550cc4d2b",
         "algorithm": "SHA-256"
+    },
+    "H:\\Desktop\\dak_py\\Chaek\\DATA\\File_Integrity_Data\\Import_File\\Document.txt": {
+        "hash": "076e8c50a6e6ea975b400c2a60c3eadd3ba3615b49c90547381b875550cc4d2b",
+        "algorithm": "SHA-256"
     }
 }
