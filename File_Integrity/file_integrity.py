@@ -11,13 +11,13 @@ init(autoreset=True)
 
 # File's Relative Path for storing Hash
 
-BASE_dir = Path(__file__).resolve().parent                      # Find the script directory
+BASE_dir = Path(__file__).resolve().parent                          # Find the script directory
 
-DATA_dir = BASE_dir.parent / "DATA"                             # Find DATA directory
+DATA_dir = BASE_dir.parent / "DATA"                                 # Find DATA directory
 
-FILE_INTEGRITY_dir = DATA_dir / "File_Integrity_Data"           # Find File_Integrity_Data directory
+FILE_INTEGRITY_dir = DATA_dir / "File_Integrity_Data"               # Find File_Integrity_Data directory
 
-HASH_FILE = FILE_INTEGRITY_dir / "File_Hash" / "hash_storage.json"    # Find hash file 
+HASH_FILE = FILE_INTEGRITY_dir / "File_Hash" / "hash_storage.json"  # Find hash file 
 
 
 # Calculate SHA-256 hash of a file
@@ -59,11 +59,11 @@ def load_hashes():
         HASH_FILE.parent.mkdir(exist_ok=True)   # If the file folder not exist make one
         HASH_FILE.write_text("{}")              # Then create an empty json file
 
-    with open(HASH_FILE, "r") as f:         # Open hash file as read
+    with open(HASH_FILE, "r") as f:             # Open hash file as read
         try:
-            return json.load(f)             # Try to convert file content to python Dict or List
+            return json.load(f)                 # Try to convert file content to python Dict or List
         except json.JSONDecodeError:
-            return {}                       # If file empty or invalid, return empty Dict
+            return {}                           # If file empty or invalid, return empty Dict
 
 # Save hash to JSON file
 def save_hash(file_path, file_hash):
@@ -125,8 +125,21 @@ def main():
             for i, file in enumerate(files):
                 print(f"    >> {i + 1}. {os.path.basename(file)}")
 
-            choice = int(input("\nSelect file number: ")) - 1
-            selected_file = files[choice]
+            # Select file
+            file_selected = False
+            while not file_selected:
+                
+                try:
+                    file_choice = int(input("\nSelect file number: ")) - 1
+
+                    if file_choice < 0 or file_choice >= len(files):
+                        print(Fore.RED + "Invalid number. Please select the numbers from the list.")
+                    else:
+                        selected_file = files[file_choice]
+                        print(Fore.GREEN + f"File: {os.path.basename(selected_file)} selected.")
+                    
+                except ValueError:
+                    print(Fore.RED + "Invalid input. Please enter a number only.")
 
             file_hash = cal_hash(selected_file)
             print(Fore.CYAN + f"\nSHA-256 Hash:\n{file_hash}")
